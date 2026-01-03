@@ -1,0 +1,708 @@
+ARM GAS  /tmp/ccYXHwCR.s 			page 1
+
+
+   1              		.cpu cortex-m7
+   2              		.arch armv7e-m
+   3              		.fpu fpv5-d16
+   4              		.eabi_attribute 28, 1
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 1
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.file	"ILI9341.c"
+  15              		.text
+  16              	.Ltext0:
+  17              		.cfi_sections	.debug_frame
+  18              		.file 1 "../../CM7//Core/Src/ILI9341.c"
+  19              		.section	.text.writeCommand,"ax",%progbits
+  20              		.align	1
+  21              		.global	writeCommand
+  22              		.syntax unified
+  23              		.thumb
+  24              		.thumb_func
+  26              	writeCommand:
+  27              	.LVL0:
+  28              	.LFB147:
+   1:../../CM7//Core/Src/ILI9341.c **** #include "../Inc/ILI9341.h"
+   2:../../CM7//Core/Src/ILI9341.c **** #include "main.h"
+   3:../../CM7//Core/Src/ILI9341.c **** 
+   4:../../CM7//Core/Src/ILI9341.c **** inline void writeCommand(uint8_t cmd) {
+  29              		.loc 1 4 39 view -0
+  30              		.cfi_startproc
+  31              		@ args = 0, pretend = 0, frame = 0
+  32              		@ frame_needed = 0, uses_anonymous_args = 0
+  33              		@ link register save eliminated.
+   5:../../CM7//Core/Src/ILI9341.c ****   CDX_GPIO_Port->BSRR = (CDX_Pin << 16);                  // set CDX low
+  34              		.loc 1 5 3 view .LVU1
+  35              		.loc 1 5 23 is_stmt 0 view .LVU2
+  36 0000 0A4B     		ldr	r3, .L2
+  37 0002 4FF08072 		mov	r2, #16777216
+  38 0006 9A61     		str	r2, [r3, #24]
+   6:../../CM7//Core/Src/ILI9341.c ****   CSX_GPIO_Port->BSRR = (CSX_Pin << 16);                  // set CSX low
+  39              		.loc 1 6 3 is_stmt 1 view .LVU3
+  40              		.loc 1 6 23 is_stmt 0 view .LVU4
+  41 0008 4FF00072 		mov	r2, #33554432
+  42 000c 9A61     		str	r2, [r3, #24]
+   7:../../CM7//Core/Src/ILI9341.c ****   D0_GPIO_Port->ODR = (D0_GPIO_Port->ODR & 0xFF00) | cmd; // set D0-D7
+  43              		.loc 1 7 3 is_stmt 1 view .LVU5
+  44              		.loc 1 7 36 is_stmt 0 view .LVU6
+  45 000e 0849     		ldr	r1, .L2+4
+  46 0010 4A69     		ldr	r2, [r1, #20]
+  47              		.loc 1 7 42 view .LVU7
+  48 0012 02F47F42 		and	r2, r2, #65280
+  49              		.loc 1 7 52 view .LVU8
+  50 0016 1043     		orrs	r0, r0, r2
+  51              	.LVL1:
+ARM GAS  /tmp/ccYXHwCR.s 			page 2
+
+
+  52              		.loc 1 7 21 view .LVU9
+  53 0018 4861     		str	r0, [r1, #20]
+   8:../../CM7//Core/Src/ILI9341.c ****   WRX_GPIO_Port->BSRR = (WRX_Pin << 16);                  // set WRX low
+  54              		.loc 1 8 3 is_stmt 1 view .LVU10
+  55              		.loc 1 8 23 is_stmt 0 view .LVU11
+  56 001a 4FF40002 		mov	r2, #8388608
+  57 001e 9A61     		str	r2, [r3, #24]
+   9:../../CM7//Core/Src/ILI9341.c ****   WRX_GPIO_Port->BSRR = (WRX_Pin);                        // set WRX high
+  58              		.loc 1 9 3 is_stmt 1 view .LVU12
+  59              		.loc 1 9 23 is_stmt 0 view .LVU13
+  60 0020 8022     		movs	r2, #128
+  61 0022 9A61     		str	r2, [r3, #24]
+  10:../../CM7//Core/Src/ILI9341.c ****   CSX_GPIO_Port->BSRR = (CSX_Pin);                        // set CSX high
+  62              		.loc 1 10 3 is_stmt 1 view .LVU14
+  63              		.loc 1 10 23 is_stmt 0 view .LVU15
+  64 0024 4FF40072 		mov	r2, #512
+  65 0028 9A61     		str	r2, [r3, #24]
+  11:../../CM7//Core/Src/ILI9341.c **** }
+  66              		.loc 1 11 1 view .LVU16
+  67 002a 7047     		bx	lr
+  68              	.L3:
+  69              		.align	2
+  70              	.L2:
+  71 002c 00080258 		.word	1476528128
+  72 0030 000C0258 		.word	1476529152
+  73              		.cfi_endproc
+  74              	.LFE147:
+  76              		.section	.text.writeData,"ax",%progbits
+  77              		.align	1
+  78              		.global	writeData
+  79              		.syntax unified
+  80              		.thumb
+  81              		.thumb_func
+  83              	writeData:
+  84              	.LVL2:
+  85              	.LFB148:
+  12:../../CM7//Core/Src/ILI9341.c **** 
+  13:../../CM7//Core/Src/ILI9341.c **** inline void writeData(uint8_t data) {
+  86              		.loc 1 13 37 is_stmt 1 view -0
+  87              		.cfi_startproc
+  88              		@ args = 0, pretend = 0, frame = 0
+  89              		@ frame_needed = 0, uses_anonymous_args = 0
+  90              		@ link register save eliminated.
+  14:../../CM7//Core/Src/ILI9341.c ****   CDX_GPIO_Port->BSRR = (CDX_Pin);                         // set CDX high
+  91              		.loc 1 14 3 view .LVU18
+  92              		.loc 1 14 23 is_stmt 0 view .LVU19
+  93 0000 0A4B     		ldr	r3, .L5
+  94 0002 4FF48072 		mov	r2, #256
+  95 0006 9A61     		str	r2, [r3, #24]
+  15:../../CM7//Core/Src/ILI9341.c ****   CSX_GPIO_Port->BSRR = (CSX_Pin << 16);                   // set CSX low
+  96              		.loc 1 15 3 is_stmt 1 view .LVU20
+  97              		.loc 1 15 23 is_stmt 0 view .LVU21
+  98 0008 4FF00072 		mov	r2, #33554432
+  99 000c 9A61     		str	r2, [r3, #24]
+  16:../../CM7//Core/Src/ILI9341.c ****   D0_GPIO_Port->ODR = (D0_GPIO_Port->ODR & 0xFF00) | data; // set D0-D7
+ 100              		.loc 1 16 3 is_stmt 1 view .LVU22
+ 101              		.loc 1 16 36 is_stmt 0 view .LVU23
+ARM GAS  /tmp/ccYXHwCR.s 			page 3
+
+
+ 102 000e 0849     		ldr	r1, .L5+4
+ 103 0010 4A69     		ldr	r2, [r1, #20]
+ 104              		.loc 1 16 42 view .LVU24
+ 105 0012 02F47F42 		and	r2, r2, #65280
+ 106              		.loc 1 16 52 view .LVU25
+ 107 0016 1043     		orrs	r0, r0, r2
+ 108              	.LVL3:
+ 109              		.loc 1 16 21 view .LVU26
+ 110 0018 4861     		str	r0, [r1, #20]
+  17:../../CM7//Core/Src/ILI9341.c ****   WRX_GPIO_Port->BSRR = (WRX_Pin << 16);                   // set WRX low
+ 111              		.loc 1 17 3 is_stmt 1 view .LVU27
+ 112              		.loc 1 17 23 is_stmt 0 view .LVU28
+ 113 001a 4FF40002 		mov	r2, #8388608
+ 114 001e 9A61     		str	r2, [r3, #24]
+  18:../../CM7//Core/Src/ILI9341.c ****   WRX_GPIO_Port->BSRR = (WRX_Pin);                         // set WRX high
+ 115              		.loc 1 18 3 is_stmt 1 view .LVU29
+ 116              		.loc 1 18 23 is_stmt 0 view .LVU30
+ 117 0020 8022     		movs	r2, #128
+ 118 0022 9A61     		str	r2, [r3, #24]
+  19:../../CM7//Core/Src/ILI9341.c ****   CSX_GPIO_Port->BSRR = (CSX_Pin);                         // set CSX high
+ 119              		.loc 1 19 3 is_stmt 1 view .LVU31
+ 120              		.loc 1 19 23 is_stmt 0 view .LVU32
+ 121 0024 4FF40072 		mov	r2, #512
+ 122 0028 9A61     		str	r2, [r3, #24]
+  20:../../CM7//Core/Src/ILI9341.c **** }
+ 123              		.loc 1 20 1 view .LVU33
+ 124 002a 7047     		bx	lr
+ 125              	.L6:
+ 126              		.align	2
+ 127              	.L5:
+ 128 002c 00080258 		.word	1476528128
+ 129 0030 000C0258 		.word	1476529152
+ 130              		.cfi_endproc
+ 131              	.LFE148:
+ 133              		.section	.text.ILI9341Init,"ax",%progbits
+ 134              		.align	1
+ 135              		.global	ILI9341Init
+ 136              		.syntax unified
+ 137              		.thumb
+ 138              		.thumb_func
+ 140              	ILI9341Init:
+ 141              	.LFB149:
+  21:../../CM7//Core/Src/ILI9341.c **** 
+  22:../../CM7//Core/Src/ILI9341.c **** void ILI9341Init(void) {
+ 142              		.loc 1 22 24 is_stmt 1 view -0
+ 143              		.cfi_startproc
+ 144              		@ args = 0, pretend = 0, frame = 0
+ 145              		@ frame_needed = 0, uses_anonymous_args = 0
+ 146 0000 08B5     		push	{r3, lr}
+ 147              	.LCFI0:
+ 148              		.cfi_def_cfa_offset 8
+ 149              		.cfi_offset 3, -8
+ 150              		.cfi_offset 14, -4
+  23:../../CM7//Core/Src/ILI9341.c ****   /* Power control B */
+  24:../../CM7//Core/Src/ILI9341.c ****   writeCommand(LCD_POWERB); // 0xCF
+ 151              		.loc 1 24 3 view .LVU35
+ 152 0002 CF20     		movs	r0, #207
+ARM GAS  /tmp/ccYXHwCR.s 			page 4
+
+
+ 153 0004 FFF7FEFF 		bl	writeCommand
+ 154              	.LVL4:
+  25:../../CM7//Core/Src/ILI9341.c ****   writeData(0x00);
+ 155              		.loc 1 25 3 view .LVU36
+ 156 0008 0020     		movs	r0, #0
+ 157 000a FFF7FEFF 		bl	writeData
+ 158              	.LVL5:
+  26:../../CM7//Core/Src/ILI9341.c ****   writeData(0xC1);
+ 159              		.loc 1 26 3 view .LVU37
+ 160 000e C120     		movs	r0, #193
+ 161 0010 FFF7FEFF 		bl	writeData
+ 162              	.LVL6:
+  27:../../CM7//Core/Src/ILI9341.c ****   writeData(0x30);
+ 163              		.loc 1 27 3 view .LVU38
+ 164 0014 3020     		movs	r0, #48
+ 165 0016 FFF7FEFF 		bl	writeData
+ 166              	.LVL7:
+  28:../../CM7//Core/Src/ILI9341.c **** 
+  29:../../CM7//Core/Src/ILI9341.c ****   /* Power on sequence control */
+  30:../../CM7//Core/Src/ILI9341.c ****   writeCommand(LCD_POWER_SEQ); // 0xED
+ 167              		.loc 1 30 3 view .LVU39
+ 168 001a ED20     		movs	r0, #237
+ 169 001c FFF7FEFF 		bl	writeCommand
+ 170              	.LVL8:
+  31:../../CM7//Core/Src/ILI9341.c ****   writeData(0x64);
+ 171              		.loc 1 31 3 view .LVU40
+ 172 0020 6420     		movs	r0, #100
+ 173 0022 FFF7FEFF 		bl	writeData
+ 174              	.LVL9:
+  32:../../CM7//Core/Src/ILI9341.c ****   writeData(0x03);
+ 175              		.loc 1 32 3 view .LVU41
+ 176 0026 0320     		movs	r0, #3
+ 177 0028 FFF7FEFF 		bl	writeData
+ 178              	.LVL10:
+  33:../../CM7//Core/Src/ILI9341.c ****   writeData(0x12);
+ 179              		.loc 1 33 3 view .LVU42
+ 180 002c 1220     		movs	r0, #18
+ 181 002e FFF7FEFF 		bl	writeData
+ 182              	.LVL11:
+  34:../../CM7//Core/Src/ILI9341.c ****   writeData(0x81);
+ 183              		.loc 1 34 3 view .LVU43
+ 184 0032 8120     		movs	r0, #129
+ 185 0034 FFF7FEFF 		bl	writeData
+ 186              	.LVL12:
+  35:../../CM7//Core/Src/ILI9341.c **** 
+  36:../../CM7//Core/Src/ILI9341.c ****   /* Driver timing control A */
+  37:../../CM7//Core/Src/ILI9341.c ****   writeCommand(LCD_DTCA); // 0xE8
+ 187              		.loc 1 37 3 view .LVU44
+ 188 0038 E820     		movs	r0, #232
+ 189 003a FFF7FEFF 		bl	writeCommand
+ 190              	.LVL13:
+  38:../../CM7//Core/Src/ILI9341.c ****   writeData(0x85);
+ 191              		.loc 1 38 3 view .LVU45
+ 192 003e 8520     		movs	r0, #133
+ 193 0040 FFF7FEFF 		bl	writeData
+ 194              	.LVL14:
+  39:../../CM7//Core/Src/ILI9341.c ****   writeData(0x00);
+ARM GAS  /tmp/ccYXHwCR.s 			page 5
+
+
+ 195              		.loc 1 39 3 view .LVU46
+ 196 0044 0020     		movs	r0, #0
+ 197 0046 FFF7FEFF 		bl	writeData
+ 198              	.LVL15:
+  40:../../CM7//Core/Src/ILI9341.c ****   writeData(0x78);
+ 199              		.loc 1 40 3 view .LVU47
+ 200 004a 7820     		movs	r0, #120
+ 201 004c FFF7FEFF 		bl	writeData
+ 202              	.LVL16:
+  41:../../CM7//Core/Src/ILI9341.c **** 
+  42:../../CM7//Core/Src/ILI9341.c ****   /* Power control A */
+  43:../../CM7//Core/Src/ILI9341.c ****   writeCommand(LCD_POWERA); // 0xCB
+ 203              		.loc 1 43 3 view .LVU48
+ 204 0050 CB20     		movs	r0, #203
+ 205 0052 FFF7FEFF 		bl	writeCommand
+ 206              	.LVL17:
+  44:../../CM7//Core/Src/ILI9341.c ****   writeData(0x39);
+ 207              		.loc 1 44 3 view .LVU49
+ 208 0056 3920     		movs	r0, #57
+ 209 0058 FFF7FEFF 		bl	writeData
+ 210              	.LVL18:
+  45:../../CM7//Core/Src/ILI9341.c ****   writeData(0x2C);
+ 211              		.loc 1 45 3 view .LVU50
+ 212 005c 2C20     		movs	r0, #44
+ 213 005e FFF7FEFF 		bl	writeData
+ 214              	.LVL19:
+  46:../../CM7//Core/Src/ILI9341.c ****   writeData(0x00);
+ 215              		.loc 1 46 3 view .LVU51
+ 216 0062 0020     		movs	r0, #0
+ 217 0064 FFF7FEFF 		bl	writeData
+ 218              	.LVL20:
+  47:../../CM7//Core/Src/ILI9341.c ****   writeData(0x34);
+ 219              		.loc 1 47 3 view .LVU52
+ 220 0068 3420     		movs	r0, #52
+ 221 006a FFF7FEFF 		bl	writeData
+ 222              	.LVL21:
+  48:../../CM7//Core/Src/ILI9341.c ****   writeData(0x02);
+ 223              		.loc 1 48 3 view .LVU53
+ 224 006e 0220     		movs	r0, #2
+ 225 0070 FFF7FEFF 		bl	writeData
+ 226              	.LVL22:
+  49:../../CM7//Core/Src/ILI9341.c **** 
+  50:../../CM7//Core/Src/ILI9341.c ****   /* Pump ratio control */
+  51:../../CM7//Core/Src/ILI9341.c ****   writeCommand(LCD_PRC); // 0xF7
+ 227              		.loc 1 51 3 view .LVU54
+ 228 0074 F720     		movs	r0, #247
+ 229 0076 FFF7FEFF 		bl	writeCommand
+ 230              	.LVL23:
+  52:../../CM7//Core/Src/ILI9341.c ****   writeData(0x20);
+ 231              		.loc 1 52 3 view .LVU55
+ 232 007a 2020     		movs	r0, #32
+ 233 007c FFF7FEFF 		bl	writeData
+ 234              	.LVL24:
+  53:../../CM7//Core/Src/ILI9341.c **** 
+  54:../../CM7//Core/Src/ILI9341.c ****   /* Driver timing control B */
+  55:../../CM7//Core/Src/ILI9341.c ****   writeCommand(LCD_DTCB); // 0xEA
+ 235              		.loc 1 55 3 view .LVU56
+ARM GAS  /tmp/ccYXHwCR.s 			page 6
+
+
+ 236 0080 EA20     		movs	r0, #234
+ 237 0082 FFF7FEFF 		bl	writeCommand
+ 238              	.LVL25:
+  56:../../CM7//Core/Src/ILI9341.c ****   writeData(0x00);
+ 239              		.loc 1 56 3 view .LVU57
+ 240 0086 0020     		movs	r0, #0
+ 241 0088 FFF7FEFF 		bl	writeData
+ 242              	.LVL26:
+  57:../../CM7//Core/Src/ILI9341.c ****   writeData(0x00);
+ 243              		.loc 1 57 3 view .LVU58
+ 244 008c 0020     		movs	r0, #0
+ 245 008e FFF7FEFF 		bl	writeData
+ 246              	.LVL27:
+  58:../../CM7//Core/Src/ILI9341.c **** 
+  59:../../CM7//Core/Src/ILI9341.c ****   /* Power control 1 */
+  60:../../CM7//Core/Src/ILI9341.c ****   writeCommand(LCD_POWER1); // 0xC0
+ 247              		.loc 1 60 3 view .LVU59
+ 248 0092 C020     		movs	r0, #192
+ 249 0094 FFF7FEFF 		bl	writeCommand
+ 250              	.LVL28:
+  61:../../CM7//Core/Src/ILI9341.c ****   writeData(0x23);
+ 251              		.loc 1 61 3 view .LVU60
+ 252 0098 2320     		movs	r0, #35
+ 253 009a FFF7FEFF 		bl	writeData
+ 254              	.LVL29:
+  62:../../CM7//Core/Src/ILI9341.c **** 
+  63:../../CM7//Core/Src/ILI9341.c ****   /* Power control 2 */
+  64:../../CM7//Core/Src/ILI9341.c ****   writeCommand(LCD_POWER2); // 0xC1
+ 255              		.loc 1 64 3 view .LVU61
+ 256 009e C120     		movs	r0, #193
+ 257 00a0 FFF7FEFF 		bl	writeCommand
+ 258              	.LVL30:
+  65:../../CM7//Core/Src/ILI9341.c ****   writeData(0x10);
+ 259              		.loc 1 65 3 view .LVU62
+ 260 00a4 1020     		movs	r0, #16
+ 261 00a6 FFF7FEFF 		bl	writeData
+ 262              	.LVL31:
+  66:../../CM7//Core/Src/ILI9341.c **** 
+  67:../../CM7//Core/Src/ILI9341.c ****   /* VCOM control 1 */
+  68:../../CM7//Core/Src/ILI9341.c ****   writeCommand(LCD_VCOM1); // 0xC5
+ 263              		.loc 1 68 3 view .LVU63
+ 264 00aa C520     		movs	r0, #197
+ 265 00ac FFF7FEFF 		bl	writeCommand
+ 266              	.LVL32:
+  69:../../CM7//Core/Src/ILI9341.c ****   writeData(0x3E);
+ 267              		.loc 1 69 3 view .LVU64
+ 268 00b0 3E20     		movs	r0, #62
+ 269 00b2 FFF7FEFF 		bl	writeData
+ 270              	.LVL33:
+  70:../../CM7//Core/Src/ILI9341.c ****   writeData(0x28);
+ 271              		.loc 1 70 3 view .LVU65
+ 272 00b6 2820     		movs	r0, #40
+ 273 00b8 FFF7FEFF 		bl	writeData
+ 274              	.LVL34:
+  71:../../CM7//Core/Src/ILI9341.c **** 
+  72:../../CM7//Core/Src/ILI9341.c ****   /* VCOM control 2 */
+  73:../../CM7//Core/Src/ILI9341.c ****   writeCommand(LCD_VCOM2); // 0xC7
+ARM GAS  /tmp/ccYXHwCR.s 			page 7
+
+
+ 275              		.loc 1 73 3 view .LVU66
+ 276 00bc C720     		movs	r0, #199
+ 277 00be FFF7FEFF 		bl	writeCommand
+ 278              	.LVL35:
+  74:../../CM7//Core/Src/ILI9341.c ****   writeData(0x86);
+ 279              		.loc 1 74 3 view .LVU67
+ 280 00c2 8620     		movs	r0, #134
+ 281 00c4 FFF7FEFF 		bl	writeData
+ 282              	.LVL36:
+  75:../../CM7//Core/Src/ILI9341.c **** 
+  76:../../CM7//Core/Src/ILI9341.c ****   /* Memory Access Control */
+  77:../../CM7//Core/Src/ILI9341.c ****   writeCommand(LCD_MAC); // 0x36
+ 283              		.loc 1 77 3 view .LVU68
+ 284 00c8 3620     		movs	r0, #54
+ 285 00ca FFF7FEFF 		bl	writeCommand
+ 286              	.LVL37:
+  78:../../CM7//Core/Src/ILI9341.c ****   writeData(0x48);
+ 287              		.loc 1 78 3 view .LVU69
+ 288 00ce 4820     		movs	r0, #72
+ 289 00d0 FFF7FEFF 		bl	writeData
+ 290              	.LVL38:
+  79:../../CM7//Core/Src/ILI9341.c **** 
+  80:../../CM7//Core/Src/ILI9341.c ****   /* Vertical scroll start address */
+  81:../../CM7//Core/Src/ILI9341.c ****   writeCommand(LCD_VSCRSADD); // 0x37
+ 291              		.loc 1 81 3 view .LVU70
+ 292 00d4 3720     		movs	r0, #55
+ 293 00d6 FFF7FEFF 		bl	writeCommand
+ 294              	.LVL39:
+  82:../../CM7//Core/Src/ILI9341.c ****   writeData(0x00);
+ 295              		.loc 1 82 3 view .LVU71
+ 296 00da 0020     		movs	r0, #0
+ 297 00dc FFF7FEFF 		bl	writeData
+ 298              	.LVL40:
+  83:../../CM7//Core/Src/ILI9341.c **** 
+  84:../../CM7//Core/Src/ILI9341.c ****   /* Pixel format */
+  85:../../CM7//Core/Src/ILI9341.c ****   writeCommand(LCD_PIXEL_FORMAT); // 0x3A
+ 299              		.loc 1 85 3 view .LVU72
+ 300 00e0 3A20     		movs	r0, #58
+ 301 00e2 FFF7FEFF 		bl	writeCommand
+ 302              	.LVL41:
+  86:../../CM7//Core/Src/ILI9341.c ****   writeData(0x55);                // 16-bit color
+ 303              		.loc 1 86 3 view .LVU73
+ 304 00e6 5520     		movs	r0, #85
+ 305 00e8 FFF7FEFF 		bl	writeData
+ 306              	.LVL42:
+  87:../../CM7//Core/Src/ILI9341.c **** 
+  88:../../CM7//Core/Src/ILI9341.c ****   /* Frame rate control */
+  89:../../CM7//Core/Src/ILI9341.c ****   writeCommand(LCD_FRMCTR1); // 0xB1
+ 307              		.loc 1 89 3 view .LVU74
+ 308 00ec B120     		movs	r0, #177
+ 309 00ee FFF7FEFF 		bl	writeCommand
+ 310              	.LVL43:
+  90:../../CM7//Core/Src/ILI9341.c ****   writeData(0x00);
+ 311              		.loc 1 90 3 view .LVU75
+ 312 00f2 0020     		movs	r0, #0
+ 313 00f4 FFF7FEFF 		bl	writeData
+ 314              	.LVL44:
+ARM GAS  /tmp/ccYXHwCR.s 			page 8
+
+
+  91:../../CM7//Core/Src/ILI9341.c ****   writeData(0x18);
+ 315              		.loc 1 91 3 view .LVU76
+ 316 00f8 1820     		movs	r0, #24
+ 317 00fa FFF7FEFF 		bl	writeData
+ 318              	.LVL45:
+  92:../../CM7//Core/Src/ILI9341.c **** 
+  93:../../CM7//Core/Src/ILI9341.c ****   /* Display function control */
+  94:../../CM7//Core/Src/ILI9341.c ****   writeCommand(LCD_DFC); // 0xB6
+ 319              		.loc 1 94 3 view .LVU77
+ 320 00fe B620     		movs	r0, #182
+ 321 0100 FFF7FEFF 		bl	writeCommand
+ 322              	.LVL46:
+  95:../../CM7//Core/Src/ILI9341.c ****   writeData(0x08);
+ 323              		.loc 1 95 3 view .LVU78
+ 324 0104 0820     		movs	r0, #8
+ 325 0106 FFF7FEFF 		bl	writeData
+ 326              	.LVL47:
+  96:../../CM7//Core/Src/ILI9341.c ****   writeData(0x82);
+ 327              		.loc 1 96 3 view .LVU79
+ 328 010a 8220     		movs	r0, #130
+ 329 010c FFF7FEFF 		bl	writeData
+ 330              	.LVL48:
+  97:../../CM7//Core/Src/ILI9341.c ****   writeData(0x27);
+ 331              		.loc 1 97 3 view .LVU80
+ 332 0110 2720     		movs	r0, #39
+ 333 0112 FFF7FEFF 		bl	writeData
+ 334              	.LVL49:
+  98:../../CM7//Core/Src/ILI9341.c **** 
+  99:../../CM7//Core/Src/ILI9341.c ****   /* 3 Gamma function disable */
+ 100:../../CM7//Core/Src/ILI9341.c ****   writeCommand(LCD_3GAMMA_EN); // 0xF2
+ 335              		.loc 1 100 3 view .LVU81
+ 336 0116 F220     		movs	r0, #242
+ 337 0118 FFF7FEFF 		bl	writeCommand
+ 338              	.LVL50:
+ 101:../../CM7//Core/Src/ILI9341.c ****   writeData(0x00);
+ 339              		.loc 1 101 3 view .LVU82
+ 340 011c 0020     		movs	r0, #0
+ 341 011e FFF7FEFF 		bl	writeData
+ 342              	.LVL51:
+ 102:../../CM7//Core/Src/ILI9341.c **** 
+ 103:../../CM7//Core/Src/ILI9341.c ****   /* Gamma curve selected */
+ 104:../../CM7//Core/Src/ILI9341.c ****   writeCommand(LCD_GAMMA); // 0x26
+ 343              		.loc 1 104 3 view .LVU83
+ 344 0122 2620     		movs	r0, #38
+ 345 0124 FFF7FEFF 		bl	writeCommand
+ 346              	.LVL52:
+ 105:../../CM7//Core/Src/ILI9341.c ****   writeData(0x01);
+ 347              		.loc 1 105 3 view .LVU84
+ 348 0128 0120     		movs	r0, #1
+ 349 012a FFF7FEFF 		bl	writeData
+ 350              	.LVL53:
+ 106:../../CM7//Core/Src/ILI9341.c **** 
+ 107:../../CM7//Core/Src/ILI9341.c ****   /* Positive gamma correction */
+ 108:../../CM7//Core/Src/ILI9341.c ****   writeCommand(LCD_PGAMMA); // 0xE0
+ 351              		.loc 1 108 3 view .LVU85
+ 352 012e E020     		movs	r0, #224
+ 353 0130 FFF7FEFF 		bl	writeCommand
+ARM GAS  /tmp/ccYXHwCR.s 			page 9
+
+
+ 354              	.LVL54:
+ 109:../../CM7//Core/Src/ILI9341.c ****   writeData(0x0F);
+ 355              		.loc 1 109 3 view .LVU86
+ 356 0134 0F20     		movs	r0, #15
+ 357 0136 FFF7FEFF 		bl	writeData
+ 358              	.LVL55:
+ 110:../../CM7//Core/Src/ILI9341.c ****   writeData(0x31);
+ 359              		.loc 1 110 3 view .LVU87
+ 360 013a 3120     		movs	r0, #49
+ 361 013c FFF7FEFF 		bl	writeData
+ 362              	.LVL56:
+ 111:../../CM7//Core/Src/ILI9341.c ****   writeData(0x2B);
+ 363              		.loc 1 111 3 view .LVU88
+ 364 0140 2B20     		movs	r0, #43
+ 365 0142 FFF7FEFF 		bl	writeData
+ 366              	.LVL57:
+ 112:../../CM7//Core/Src/ILI9341.c ****   writeData(0x0C);
+ 367              		.loc 1 112 3 view .LVU89
+ 368 0146 0C20     		movs	r0, #12
+ 369 0148 FFF7FEFF 		bl	writeData
+ 370              	.LVL58:
+ 113:../../CM7//Core/Src/ILI9341.c ****   writeData(0x0E);
+ 371              		.loc 1 113 3 view .LVU90
+ 372 014c 0E20     		movs	r0, #14
+ 373 014e FFF7FEFF 		bl	writeData
+ 374              	.LVL59:
+ 114:../../CM7//Core/Src/ILI9341.c ****   writeData(0x08);
+ 375              		.loc 1 114 3 view .LVU91
+ 376 0152 0820     		movs	r0, #8
+ 377 0154 FFF7FEFF 		bl	writeData
+ 378              	.LVL60:
+ 115:../../CM7//Core/Src/ILI9341.c ****   writeData(0x4E);
+ 379              		.loc 1 115 3 view .LVU92
+ 380 0158 4E20     		movs	r0, #78
+ 381 015a FFF7FEFF 		bl	writeData
+ 382              	.LVL61:
+ 116:../../CM7//Core/Src/ILI9341.c ****   writeData(0xF1);
+ 383              		.loc 1 116 3 view .LVU93
+ 384 015e F120     		movs	r0, #241
+ 385 0160 FFF7FEFF 		bl	writeData
+ 386              	.LVL62:
+ 117:../../CM7//Core/Src/ILI9341.c ****   writeData(0x37);
+ 387              		.loc 1 117 3 view .LVU94
+ 388 0164 3720     		movs	r0, #55
+ 389 0166 FFF7FEFF 		bl	writeData
+ 390              	.LVL63:
+ 118:../../CM7//Core/Src/ILI9341.c ****   writeData(0x07);
+ 391              		.loc 1 118 3 view .LVU95
+ 392 016a 0720     		movs	r0, #7
+ 393 016c FFF7FEFF 		bl	writeData
+ 394              	.LVL64:
+ 119:../../CM7//Core/Src/ILI9341.c ****   writeData(0x10);
+ 395              		.loc 1 119 3 view .LVU96
+ 396 0170 1020     		movs	r0, #16
+ 397 0172 FFF7FEFF 		bl	writeData
+ 398              	.LVL65:
+ 120:../../CM7//Core/Src/ILI9341.c ****   writeData(0x03);
+ARM GAS  /tmp/ccYXHwCR.s 			page 10
+
+
+ 399              		.loc 1 120 3 view .LVU97
+ 400 0176 0320     		movs	r0, #3
+ 401 0178 FFF7FEFF 		bl	writeData
+ 402              	.LVL66:
+ 121:../../CM7//Core/Src/ILI9341.c ****   writeData(0x0E);
+ 403              		.loc 1 121 3 view .LVU98
+ 404 017c 0E20     		movs	r0, #14
+ 405 017e FFF7FEFF 		bl	writeData
+ 406              	.LVL67:
+ 122:../../CM7//Core/Src/ILI9341.c ****   writeData(0x09);
+ 407              		.loc 1 122 3 view .LVU99
+ 408 0182 0920     		movs	r0, #9
+ 409 0184 FFF7FEFF 		bl	writeData
+ 410              	.LVL68:
+ 123:../../CM7//Core/Src/ILI9341.c ****   writeData(0x00);
+ 411              		.loc 1 123 3 view .LVU100
+ 412 0188 0020     		movs	r0, #0
+ 413 018a FFF7FEFF 		bl	writeData
+ 414              	.LVL69:
+ 124:../../CM7//Core/Src/ILI9341.c **** 
+ 125:../../CM7//Core/Src/ILI9341.c ****   /* Negative gamma correction */
+ 126:../../CM7//Core/Src/ILI9341.c ****   writeCommand(LCD_NGAMMA); // 0xE1
+ 415              		.loc 1 126 3 view .LVU101
+ 416 018e E120     		movs	r0, #225
+ 417 0190 FFF7FEFF 		bl	writeCommand
+ 418              	.LVL70:
+ 127:../../CM7//Core/Src/ILI9341.c ****   writeData(0x00);
+ 419              		.loc 1 127 3 view .LVU102
+ 420 0194 0020     		movs	r0, #0
+ 421 0196 FFF7FEFF 		bl	writeData
+ 422              	.LVL71:
+ 128:../../CM7//Core/Src/ILI9341.c ****   writeData(0x0E);
+ 423              		.loc 1 128 3 view .LVU103
+ 424 019a 0E20     		movs	r0, #14
+ 425 019c FFF7FEFF 		bl	writeData
+ 426              	.LVL72:
+ 129:../../CM7//Core/Src/ILI9341.c ****   writeData(0x14);
+ 427              		.loc 1 129 3 view .LVU104
+ 428 01a0 1420     		movs	r0, #20
+ 429 01a2 FFF7FEFF 		bl	writeData
+ 430              	.LVL73:
+ 130:../../CM7//Core/Src/ILI9341.c ****   writeData(0x03);
+ 431              		.loc 1 130 3 view .LVU105
+ 432 01a6 0320     		movs	r0, #3
+ 433 01a8 FFF7FEFF 		bl	writeData
+ 434              	.LVL74:
+ 131:../../CM7//Core/Src/ILI9341.c ****   writeData(0x11);
+ 435              		.loc 1 131 3 view .LVU106
+ 436 01ac 1120     		movs	r0, #17
+ 437 01ae FFF7FEFF 		bl	writeData
+ 438              	.LVL75:
+ 132:../../CM7//Core/Src/ILI9341.c ****   writeData(0x07);
+ 439              		.loc 1 132 3 view .LVU107
+ 440 01b2 0720     		movs	r0, #7
+ 441 01b4 FFF7FEFF 		bl	writeData
+ 442              	.LVL76:
+ 133:../../CM7//Core/Src/ILI9341.c ****   writeData(0x31);
+ARM GAS  /tmp/ccYXHwCR.s 			page 11
+
+
+ 443              		.loc 1 133 3 view .LVU108
+ 444 01b8 3120     		movs	r0, #49
+ 445 01ba FFF7FEFF 		bl	writeData
+ 446              	.LVL77:
+ 134:../../CM7//Core/Src/ILI9341.c ****   writeData(0xC1);
+ 447              		.loc 1 134 3 view .LVU109
+ 448 01be C120     		movs	r0, #193
+ 449 01c0 FFF7FEFF 		bl	writeData
+ 450              	.LVL78:
+ 135:../../CM7//Core/Src/ILI9341.c ****   writeData(0x48);
+ 451              		.loc 1 135 3 view .LVU110
+ 452 01c4 4820     		movs	r0, #72
+ 453 01c6 FFF7FEFF 		bl	writeData
+ 454              	.LVL79:
+ 136:../../CM7//Core/Src/ILI9341.c ****   writeData(0x08);
+ 455              		.loc 1 136 3 view .LVU111
+ 456 01ca 0820     		movs	r0, #8
+ 457 01cc FFF7FEFF 		bl	writeData
+ 458              	.LVL80:
+ 137:../../CM7//Core/Src/ILI9341.c ****   writeData(0x0F);
+ 459              		.loc 1 137 3 view .LVU112
+ 460 01d0 0F20     		movs	r0, #15
+ 461 01d2 FFF7FEFF 		bl	writeData
+ 462              	.LVL81:
+ 138:../../CM7//Core/Src/ILI9341.c ****   writeData(0x0C);
+ 463              		.loc 1 138 3 view .LVU113
+ 464 01d6 0C20     		movs	r0, #12
+ 465 01d8 FFF7FEFF 		bl	writeData
+ 466              	.LVL82:
+ 139:../../CM7//Core/Src/ILI9341.c ****   writeData(0x31);
+ 467              		.loc 1 139 3 view .LVU114
+ 468 01dc 3120     		movs	r0, #49
+ 469 01de FFF7FEFF 		bl	writeData
+ 470              	.LVL83:
+ 140:../../CM7//Core/Src/ILI9341.c ****   writeData(0x36);
+ 471              		.loc 1 140 3 view .LVU115
+ 472 01e2 3620     		movs	r0, #54
+ 473 01e4 FFF7FEFF 		bl	writeData
+ 474              	.LVL84:
+ 141:../../CM7//Core/Src/ILI9341.c ****   writeData(0x0F);
+ 475              		.loc 1 141 3 view .LVU116
+ 476 01e8 0F20     		movs	r0, #15
+ 477 01ea FFF7FEFF 		bl	writeData
+ 478              	.LVL85:
+ 142:../../CM7//Core/Src/ILI9341.c **** 
+ 143:../../CM7//Core/Src/ILI9341.c ****   /* Exit sleep mode */
+ 144:../../CM7//Core/Src/ILI9341.c ****   writeCommand(LCD_SLEEP_OUT);
+ 479              		.loc 1 144 3 view .LVU117
+ 480 01ee 1120     		movs	r0, #17
+ 481 01f0 FFF7FEFF 		bl	writeCommand
+ 482              	.LVL86:
+ 145:../../CM7//Core/Src/ILI9341.c ****   HAL_Delay(150);
+ 483              		.loc 1 145 3 view .LVU118
+ 484 01f4 9620     		movs	r0, #150
+ 485 01f6 FFF7FEFF 		bl	HAL_Delay
+ 486              	.LVL87:
+ 146:../../CM7//Core/Src/ILI9341.c **** 
+ARM GAS  /tmp/ccYXHwCR.s 			page 12
+
+
+ 147:../../CM7//Core/Src/ILI9341.c ****   /* Display ON */
+ 148:../../CM7//Core/Src/ILI9341.c ****   writeCommand(LCD_DISPLAY_ON);
+ 487              		.loc 1 148 3 view .LVU119
+ 488 01fa 2920     		movs	r0, #41
+ 489 01fc FFF7FEFF 		bl	writeCommand
+ 490              	.LVL88:
+ 149:../../CM7//Core/Src/ILI9341.c ****   HAL_Delay(150);
+ 491              		.loc 1 149 3 view .LVU120
+ 492 0200 9620     		movs	r0, #150
+ 493 0202 FFF7FEFF 		bl	HAL_Delay
+ 494              	.LVL89:
+ 150:../../CM7//Core/Src/ILI9341.c **** 
+ 151:../../CM7//Core/Src/ILI9341.c ****   /* Normal display mode */
+ 152:../../CM7//Core/Src/ILI9341.c ****   writeCommand(LCD_NORMAL_MODE_ON);
+ 495              		.loc 1 152 3 view .LVU121
+ 496 0206 1320     		movs	r0, #19
+ 497 0208 FFF7FEFF 		bl	writeCommand
+ 498              	.LVL90:
+ 153:../../CM7//Core/Src/ILI9341.c **** }
+ 499              		.loc 1 153 1 is_stmt 0 view .LVU122
+ 500 020c 08BD     		pop	{r3, pc}
+ 501              		.cfi_endproc
+ 502              	.LFE149:
+ 504              		.text
+ 505              	.Letext0:
+ 506              		.file 2 "/usr/arm-none-eabi/include/machine/_default_types.h"
+ 507              		.file 3 "/usr/arm-none-eabi/include/sys/_stdint.h"
+ 508              		.file 4 "../../Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h755xx.h"
+ 509              		.file 5 "../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h"
+ARM GAS  /tmp/ccYXHwCR.s 			page 13
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 ILI9341.c
+     /tmp/ccYXHwCR.s:20     .text.writeCommand:00000000 $t
+     /tmp/ccYXHwCR.s:26     .text.writeCommand:00000000 writeCommand
+     /tmp/ccYXHwCR.s:71     .text.writeCommand:0000002c $d
+     /tmp/ccYXHwCR.s:77     .text.writeData:00000000 $t
+     /tmp/ccYXHwCR.s:83     .text.writeData:00000000 writeData
+     /tmp/ccYXHwCR.s:128    .text.writeData:0000002c $d
+     /tmp/ccYXHwCR.s:134    .text.ILI9341Init:00000000 $t
+     /tmp/ccYXHwCR.s:140    .text.ILI9341Init:00000000 ILI9341Init
+
+UNDEFINED SYMBOLS
+HAL_Delay
