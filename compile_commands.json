@@ -16,6 +16,8 @@
       "-IDrivers/CMSIS/Device/ST/STM32H7xx/Include",
       "-IDrivers/CMSIS/Include",
       "-IDrivers/BSP/STM32H7xx_Nucleo",
+      "-IDrivers/lvgl",
+      "-IDrivers/lv_conf.h",
       "-isystem",
       "/usr/arm-none-eabi/include",
       "-Og",

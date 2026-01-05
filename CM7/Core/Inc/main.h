@@ -45,7 +45,6 @@ extern "C" {
 /* Exported constants --------------------------------------------------------*/
 /* USER CODE BEGIN EC */
 extern COM_InitTypeDef BspCOMInit;
-extern SPI_HandleTypeDef hspi1;
 /* USER CODE END EC */
 
 /* Exported macro ------------------------------------------------------------*/
@@ -65,7 +64,6 @@ void Error_Handler(void);
 #define USB_OTG_FS_PWR_EN_GPIO_Port GPIOD
 #define USB_OTG_FS_OVCR_Pin GPIO_PIN_7
 #define USB_OTG_FS_OVCR_GPIO_Port GPIOG
-
 #define RESX_Pin GPIO_PIN_6
 #define RESX_GPIO_Port GPIOC
 #define WRX_Pin GPIO_PIN_7
@@ -74,7 +72,6 @@ void Error_Handler(void);
 #define CDX_GPIO_Port GPIOC
 #define CSX_Pin GPIO_PIN_9
 #define CSX_GPIO_Port GPIOC
-
 #define D0_Pin GPIO_PIN_0
 #define D0_GPIO_Port GPIOD
 #define D1_Pin GPIO_PIN_1
@@ -91,7 +88,6 @@ void Error_Handler(void);
 #define D6_GPIO_Port GPIOD
 #define D7_Pin GPIO_PIN_7
 #define D7_GPIO_Port GPIOD
-
 #define LED_Test_Pin GPIO_PIN_14
 #define LED_Test_GPIO_Port GPIOG
 
