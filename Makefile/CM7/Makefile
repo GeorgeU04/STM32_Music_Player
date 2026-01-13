@@ -27,7 +27,7 @@ C_INCLUDES = \
 -I../../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy \
 -I../../Drivers/BSP/STM32H7xx_Nucleo \
 -I../../Drivers/CMSIS/Device/ST/STM32H7xx/Include \
--I../../Drivers/CMSIS/Include
+-I../../Drivers/CMSIS/Include \
 
 CFLAGS = $(MCU) $(C_DEFS) $(C_INCLUDES) $(OPT) -Wall -fdata-sections -ffunction-sections
 ASFLAGS = $(MCU) $(OPT) -Wall -fdata-sections -ffunction-sections
@@ -89,7 +89,9 @@ C_SOURCES := \
 ../../CM7/Core/Src/sysmem.c \
 ../../CM7/Core/Src/syscalls.c \
 ../../CM7/Core/Src/ILI9341.c \
-../../CM7/Core/Src/lv_port_disp.c
+../../CM7/Core/Src/lv_port_disp.c \
+../../CM7/Core/Src/GUI.c \
+
 
 # Combine project + LVGL sources
 C_SOURCES += $(CSRCS)
@@ -99,11 +101,10 @@ CXX_SOURCES = $(CXXSRCS)
 ##########################################################
 # Objects
 ##########################################################
-OBJECTS := $(C_SOURCES)
-OBJECTS := $(patsubst %,$(BUILD_DIR)/%,$(OBJECTS))
-OBJECTS := $(OBJECTS:.c=.o)
 
-OBJECTS += $(patsubst %,$(BUILD_DIR)/%,$(AS_SOURCES:.S=.o))
+
+OBJECTS := $(addprefix $(BUILD_DIR)/,$(notdir $(C_SOURCES:.c=.o)))
+OBJECTS += $(addprefix $(BUILD_DIR)/,$(notdir $(AS_SOURCES:.S=.o)))
 OBJECTS += $(BUILD_DIR)/startup_stm32h755xx_CM7.o
 
 vpath %.c $(sort $(dir $(C_SOURCES)))
@@ -158,4 +159,3 @@ clean:
 
 # Dependencies
 -include $(wildcard $(BUILD_DIR)/**/*.d)
-
