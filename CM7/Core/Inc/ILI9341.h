@@ -8,7 +8,6 @@
 
 void writeCommand(uint8_t cmd);
 void writeData(uint8_t data);
-void ILI9341Init(void);
 
 /* Level 1 Commands */
 #define LCD_SWRESET 0x01         /* Software Reset */
