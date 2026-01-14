@@ -27,11 +27,25 @@ build/main.o: ../../CM7/Core/Src/main.c ../../CM7/Core/Inc/main.h \
  ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_i2c_ex.h \
  ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_pwr.h \
  ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_pwr_ex.h \
+ ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_sd.h \
+ ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_sdmmc.h \
+ ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_delayblock.h \
+ ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_sd_ex.h \
  ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart.h \
  ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart_ex.h \
  ../../Drivers/BSP/STM32H7xx_Nucleo/stm32h7xx_nucleo.h \
  ../../CM7/Core/Inc/stm32h7xx_nucleo_conf.h \
  ../../Drivers/BSP/STM32H7xx_Nucleo/stm32h7xx_nucleo_errno.h \
+ ../../CM7/Core/Src/../../FATFS/App/fatfs.h \
+ ../../Drivers/lvgl/../../Middlewares/Third_Party/FatFs/src/diskio.h \
+ ../../Drivers/lvgl/../../Middlewares/Third_Party/FatFs/src/integer.h \
+ ../../Drivers/lvgl/../../Middlewares/Third_Party/FatFs/src/ff.h \
+ ../../CM7/Core/Inc/../../FATFS/Target/ffconf.h \
+ ../../CM7/Core/Inc/../../FATFS/Target/bsp_driver_sd.h \
+ ../../CM7/Core/Inc/../../FATFS/Target/fatfs_platform.h \
+ ../../Drivers/lvgl/../../Middlewares/Third_Party/FatFs/src/ff_gen_drv.h \
+ ../../Drivers/lvgl/../../Middlewares/Third_Party/FatFs/src/diskio.h \
+ ../../Drivers/lvgl/../../Middlewares/Third_Party/FatFs/src/ff.h \
  ../../CM7/Core/Src/../Inc/GUI.h \
  ../../Drivers/lvgl/src/widgets/label/lv_label.h \
  ../../Drivers/lvgl/src/widgets/label/../../lv_conf_internal.h \
@@ -157,7 +171,8 @@ build/main.o: ../../CM7/Core/Src/main.c ../../CM7/Core/Inc/main.h \
  ../../Drivers/lvgl/src/widgets/label/../../misc/lv_text.h \
  ../../Drivers/lvgl/src/widgets/label/../../draw/lv_draw.h \
  ../../Drivers/lvgl/src/widgets/label/../../core/lv_observer.h \
- ../../Drivers/lvgl/src/widgets/label/../../core/lv_obj.h
+ ../../Drivers/lvgl/src/widgets/label/../../core/lv_obj.h \
+ ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_def.h
 ../../CM7/Core/Inc/main.h:
 ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h:
 ../../CM7/Core/Inc/stm32h7xx_hal_conf.h:
@@ -187,11 +202,25 @@ build/main.o: ../../CM7/Core/Src/main.c ../../CM7/Core/Inc/main.h \
 ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_i2c_ex.h:
 ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_pwr.h:
 ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_pwr_ex.h:
+../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_sd.h:
+../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_sdmmc.h:
+../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_delayblock.h:
+../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_sd_ex.h:
 ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart.h:
 ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart_ex.h:
 ../../Drivers/BSP/STM32H7xx_Nucleo/stm32h7xx_nucleo.h:
 ../../CM7/Core/Inc/stm32h7xx_nucleo_conf.h:
 ../../Drivers/BSP/STM32H7xx_Nucleo/stm32h7xx_nucleo_errno.h:
+../../CM7/Core/Src/../../FATFS/App/fatfs.h:
+../../Drivers/lvgl/../../Middlewares/Third_Party/FatFs/src/diskio.h:
+../../Drivers/lvgl/../../Middlewares/Third_Party/FatFs/src/integer.h:
+../../Drivers/lvgl/../../Middlewares/Third_Party/FatFs/src/ff.h:
+../../CM7/Core/Inc/../../FATFS/Target/ffconf.h:
+../../CM7/Core/Inc/../../FATFS/Target/bsp_driver_sd.h:
+../../CM7/Core/Inc/../../FATFS/Target/fatfs_platform.h:
+../../Drivers/lvgl/../../Middlewares/Third_Party/FatFs/src/ff_gen_drv.h:
+../../Drivers/lvgl/../../Middlewares/Third_Party/FatFs/src/diskio.h:
+../../Drivers/lvgl/../../Middlewares/Third_Party/FatFs/src/ff.h:
 ../../CM7/Core/Src/../Inc/GUI.h:
 ../../Drivers/lvgl/src/widgets/label/lv_label.h:
 ../../Drivers/lvgl/src/widgets/label/../../lv_conf_internal.h:
@@ -318,3 +347,4 @@ build/main.o: ../../CM7/Core/Src/main.c ../../CM7/Core/Inc/main.h \
 ../../Drivers/lvgl/src/widgets/label/../../draw/lv_draw.h:
 ../../Drivers/lvgl/src/widgets/label/../../core/lv_observer.h:
 ../../Drivers/lvgl/src/widgets/label/../../core/lv_obj.h:
+../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_def.h:

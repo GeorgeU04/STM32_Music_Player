@@ -14,9 +14,9 @@
 #include <stdint.h>
 
 void initScreen(void) {
-  RESX_GPIO_Port->BSRR = RESX_Pin << 16;
+  RSX_GPIO_Port->BSRR = RSX_Pin << 16;
   HAL_Delay(20);
-  RESX_GPIO_Port->BSRR = RESX_Pin;
+  RSX_GPIO_Port->BSRR = RSX_Pin;
   HAL_Delay(150);
   lv_init();
   lv_tick_set_cb(HAL_GetTick);
@@ -42,8 +42,6 @@ void drawMainScreen(void) {
   /*Change the active screen's background color*/
   lv_obj_set_style_bg_color(lv_screen_active(), lv_color_hex(0x003a57),
                             LV_PART_MAIN);
-
-  LV_IMAGE_DECLARE(imagebutton_mid);
 
   // artist name
   char artistName[32] = "Kanye West";

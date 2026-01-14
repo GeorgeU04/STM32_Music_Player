@@ -83,8 +83,16 @@ C_SOURCES := \
 ../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_tim_ex.c \
 ../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart.c \
 ../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c \
+../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_sd.c \
+../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_sd_ex.c \
 ../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_uart_ex.c \
 ../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_uart.c \
+../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_ll_sdmmc.c \
+../../Middlewares/Third_Party/FatFs/src/ff_gen_drv.c \
+../../CM7/FATFS/App/fatfs.c \
+../../CM7/FATFS/Target/sd_diskio.c \
+../../CM7/FATFS/Target/fatfs_platform.c \
+../../CM7/FATFS/Target/bsp_driver_sd.c \
 ../../Common/Src/system_stm32h7xx_dualcore_boot_cm4_cm7.c \
 ../../CM7/Core/Src/sysmem.c \
 ../../CM7/Core/Src/syscalls.c \

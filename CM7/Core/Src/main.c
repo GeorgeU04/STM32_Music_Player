@@ -18,14 +18,14 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include "../../FATFS/App/fatfs.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "../Inc/GUI.h"
 #include "src/widgets/label/lv_label.h"
+#include "stm32h7xx_hal_def.h"
 #include "stm32h7xx_hal_gpio.h"
-#include <inttypes.h>
-#include <stdint.h>
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -58,6 +58,9 @@
 
 COM_InitTypeDef BspCOMInit;
 
+SD_HandleTypeDef hsd1;
+
+MDMA_HandleTypeDef hmdma_mdma_channel0_sdmmc1_end_data_0;
 /* USER CODE BEGIN PV */
 
 /* USER CODE END PV */
@@ -65,6 +68,8 @@ COM_InitTypeDef BspCOMInit;
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
+static void MX_MDMA_Init(void);
+static void MX_SDMMC1_SD_Init(void);
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
@@ -138,6 +143,9 @@ int main(void) {
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
+  MX_MDMA_Init();
+  MX_FATFS_Init();
+  MX_SDMMC1_SD_Init();
   /* USER CODE BEGIN 2 */
   /* USER CODE END 2 */
 
@@ -164,6 +172,7 @@ int main(void) {
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   // Init Screen
+
   initScreen();
   drawMainScreen();
   while (1) {
@@ -190,7 +199,7 @@ void SystemClock_Config(void) {
 
   /** Configure the main internal regulator output voltage
    */
-  __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE2);
+  __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE3);
 
   while (!__HAL_PWR_GET_FLAG(PWR_FLAG_VOSRDY)) {
   }
@@ -204,13 +213,13 @@ void SystemClock_Config(void) {
   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
   RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSI;
   RCC_OscInitStruct.PLL.PLLM = 4;
-  RCC_OscInitStruct.PLL.PLLN = 37;
+  RCC_OscInitStruct.PLL.PLLN = 25;
   RCC_OscInitStruct.PLL.PLLP = 2;
-  RCC_OscInitStruct.PLL.PLLQ = 3;
+  RCC_OscInitStruct.PLL.PLLQ = 4;
   RCC_OscInitStruct.PLL.PLLR = 2;
   RCC_OscInitStruct.PLL.PLLRGE = RCC_PLL1VCIRANGE_3;
   RCC_OscInitStruct.PLL.PLLVCOSEL = RCC_PLL1VCOWIDE;
-  RCC_OscInitStruct.PLL.PLLFRACN = 4096;
+  RCC_OscInitStruct.PLL.PLLFRACN = 0;
   if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK) {
     Error_Handler();
   }
@@ -222,15 +231,96 @@ void SystemClock_Config(void) {
                                 RCC_CLOCKTYPE_D3PCLK1 | RCC_CLOCKTYPE_D1PCLK1;
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.SYSCLKDivider = RCC_SYSCLK_DIV1;
-  RCC_ClkInitStruct.AHBCLKDivider = RCC_HCLK_DIV2;
+  RCC_ClkInitStruct.AHBCLKDivider = RCC_HCLK_DIV1;
   RCC_ClkInitStruct.APB3CLKDivider = RCC_APB3_DIV2;
   RCC_ClkInitStruct.APB1CLKDivider = RCC_APB1_DIV2;
   RCC_ClkInitStruct.APB2CLKDivider = RCC_APB2_DIV2;
   RCC_ClkInitStruct.APB4CLKDivider = RCC_APB4_DIV2;
 
-  if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_2) != HAL_OK) {
+  if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_4) != HAL_OK) {
     Error_Handler();
   }
+}
+
+/**
+ * @brief SDMMC1 Initialization Function
+ * @param None
+ * @retval None
+ */
+static void MX_SDMMC1_SD_Init(void) {
+
+  /* USER CODE BEGIN SDMMC1_Init 0 */
+
+  /* USER CODE END SDMMC1_Init 0 */
+
+  /* USER CODE BEGIN SDMMC1_Init 1 */
+
+  /* USER CODE END SDMMC1_Init 1 */
+  hsd1.Instance = SDMMC1;
+  hsd1.Init.ClockEdge = SDMMC_CLOCK_EDGE_RISING;
+  hsd1.Init.ClockPowerSave = SDMMC_CLOCK_POWER_SAVE_DISABLE;
+  hsd1.Init.BusWide = SDMMC_BUS_WIDE_4B;
+  hsd1.Init.HardwareFlowControl = SDMMC_HARDWARE_FLOW_CONTROL_DISABLE;
+  hsd1.Init.ClockDiv = 8;
+  if (HAL_SD_Init(&hsd1) != HAL_OK) {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN SDMMC1_Init 2 */
+
+  /* USER CODE END SDMMC1_Init 2 */
+}
+
+/**
+ * Enable MDMA controller clock
+ * Configure MDMA for global transfers
+ *   hmdma_mdma_channel0_sdmmc1_end_data_0
+ */
+static void MX_MDMA_Init(void) {
+
+  /* MDMA controller clock enable */
+  __HAL_RCC_MDMA_CLK_ENABLE();
+  /* Local variables */
+
+  /* Configure MDMA channel MDMA_Channel0 */
+  /* Configure MDMA request hmdma_mdma_channel0_sdmmc1_end_data_0 on
+   * MDMA_Channel0 */
+  hmdma_mdma_channel0_sdmmc1_end_data_0.Instance = MDMA_Channel0;
+  hmdma_mdma_channel0_sdmmc1_end_data_0.Init.Request =
+      MDMA_REQUEST_SDMMC1_END_DATA;
+  hmdma_mdma_channel0_sdmmc1_end_data_0.Init.TransferTriggerMode =
+      MDMA_BUFFER_TRANSFER;
+  hmdma_mdma_channel0_sdmmc1_end_data_0.Init.Priority = MDMA_PRIORITY_LOW;
+  hmdma_mdma_channel0_sdmmc1_end_data_0.Init.Endianness =
+      MDMA_LITTLE_ENDIANNESS_PRESERVE;
+  hmdma_mdma_channel0_sdmmc1_end_data_0.Init.SourceInc = MDMA_SRC_INC_BYTE;
+  hmdma_mdma_channel0_sdmmc1_end_data_0.Init.DestinationInc =
+      MDMA_DEST_INC_BYTE;
+  hmdma_mdma_channel0_sdmmc1_end_data_0.Init.SourceDataSize =
+      MDMA_SRC_DATASIZE_BYTE;
+  hmdma_mdma_channel0_sdmmc1_end_data_0.Init.DestDataSize =
+      MDMA_DEST_DATASIZE_BYTE;
+  hmdma_mdma_channel0_sdmmc1_end_data_0.Init.DataAlignment =
+      MDMA_DATAALIGN_PACKENABLE;
+  hmdma_mdma_channel0_sdmmc1_end_data_0.Init.BufferTransferLength = 1;
+  hmdma_mdma_channel0_sdmmc1_end_data_0.Init.SourceBurst =
+      MDMA_SOURCE_BURST_SINGLE;
+  hmdma_mdma_channel0_sdmmc1_end_data_0.Init.DestBurst = MDMA_DEST_BURST_SINGLE;
+  hmdma_mdma_channel0_sdmmc1_end_data_0.Init.SourceBlockAddressOffset = 0;
+  hmdma_mdma_channel0_sdmmc1_end_data_0.Init.DestBlockAddressOffset = 0;
+  if (HAL_MDMA_Init(&hmdma_mdma_channel0_sdmmc1_end_data_0) != HAL_OK) {
+    Error_Handler();
+  }
+
+  /* Configure post request address and data masks */
+  if (HAL_MDMA_ConfigPostRequestMask(&hmdma_mdma_channel0_sdmmc1_end_data_0, 0,
+                                     0) != HAL_OK) {
+    Error_Handler();
+  }
+
+  /* MDMA interrupt initialization */
+  /* MDMA_IRQn interrupt configuration */
+  HAL_NVIC_SetPriority(MDMA_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(MDMA_IRQn);
 }
 
 /**
@@ -247,22 +337,27 @@ static void MX_GPIO_Init(void) {
   /* GPIO Ports Clock Enable */
   __HAL_RCC_GPIOC_CLK_ENABLE();
   __HAL_RCC_GPIOA_CLK_ENABLE();
+  __HAL_RCC_GPIOE_CLK_ENABLE();
   __HAL_RCC_GPIOB_CLK_ENABLE();
   __HAL_RCC_GPIOD_CLK_ENABLE();
   __HAL_RCC_GPIOG_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOD,
-                    USB_OTG_FS_PWR_EN_Pin | D0_Pin | D1_Pin | D2_Pin | D3_Pin |
-                        D4_Pin | D5_Pin | D6_Pin | D7_Pin,
+  HAL_GPIO_WritePin(GPIOE,
+                    D0_Pin | D1_Pin | D2_Pin | D3_Pin | D4_Pin | D5_Pin |
+                        D6_Pin | D7_Pin,
                     GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOC, RESX_Pin | WRX_Pin | CDX_Pin | CSX_Pin,
+  HAL_GPIO_WritePin(USB_OTG_FS_PWR_EN_GPIO_Port, USB_OTG_FS_PWR_EN_Pin,
                     GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(LED_Test_GPIO_Port, LED_Test_Pin, GPIO_PIN_RESET);
+
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(GPIOB, RSX_Pin | WRX_Pin | CDX_Pin | CSX_Pin,
+                    GPIO_PIN_RESET);
 
   /*Configure GPIO pins : PC1 PC4 PC5 */
   GPIO_InitStruct.Pin = GPIO_PIN_1 | GPIO_PIN_4 | GPIO_PIN_5;
@@ -280,6 +375,15 @@ static void MX_GPIO_Init(void) {
   GPIO_InitStruct.Alternate = GPIO_AF11_ETH;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
+  /*Configure GPIO pins : D0_Pin D1_Pin D2_Pin D3_Pin
+                           D4_Pin D5_Pin D6_Pin D7_Pin */
+  GPIO_InitStruct.Pin =
+      D0_Pin | D1_Pin | D2_Pin | D3_Pin | D4_Pin | D5_Pin | D6_Pin | D7_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
+  HAL_GPIO_Init(GPIOE, &GPIO_InitStruct);
+
   /*Configure GPIO pin : PB13 */
   GPIO_InitStruct.Pin = GPIO_PIN_13;
   GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
@@ -288,28 +392,18 @@ static void MX_GPIO_Init(void) {
   GPIO_InitStruct.Alternate = GPIO_AF11_ETH;
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : USB_OTG_FS_PWR_EN_Pin D0_Pin D1_Pin D2_Pin
-                           D3_Pin D4_Pin D5_Pin D6_Pin
-                           D7_Pin */
-  GPIO_InitStruct.Pin = USB_OTG_FS_PWR_EN_Pin | D0_Pin | D1_Pin | D2_Pin |
-                        D3_Pin | D4_Pin | D5_Pin | D6_Pin | D7_Pin;
+  /*Configure GPIO pin : USB_OTG_FS_PWR_EN_Pin */
+  GPIO_InitStruct.Pin = USB_OTG_FS_PWR_EN_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  HAL_GPIO_Init(GPIOD, &GPIO_InitStruct);
+  HAL_GPIO_Init(USB_OTG_FS_PWR_EN_GPIO_Port, &GPIO_InitStruct);
 
   /*Configure GPIO pin : USB_OTG_FS_OVCR_Pin */
   GPIO_InitStruct.Pin = USB_OTG_FS_OVCR_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(USB_OTG_FS_OVCR_GPIO_Port, &GPIO_InitStruct);
-
-  /*Configure GPIO pins : RESX_Pin WRX_Pin CDX_Pin CSX_Pin */
-  GPIO_InitStruct.Pin = RESX_Pin | WRX_Pin | CDX_Pin | CSX_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
-  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
 
   /*Configure GPIO pins : PA8 PA11 PA12 */
   GPIO_InitStruct.Pin = GPIO_PIN_8 | GPIO_PIN_11 | GPIO_PIN_12;
@@ -318,6 +412,12 @@ static void MX_GPIO_Init(void) {
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   GPIO_InitStruct.Alternate = GPIO_AF10_OTG1_FS;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
+  /*Configure GPIO pin : CD_Pin */
+  GPIO_InitStruct.Pin = CD_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_PULLUP;
+  HAL_GPIO_Init(CD_GPIO_Port, &GPIO_InitStruct);
 
   /*Configure GPIO pins : PG11 PG13 */
   GPIO_InitStruct.Pin = GPIO_PIN_11 | GPIO_PIN_13;
@@ -333,6 +433,13 @@ static void MX_GPIO_Init(void) {
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(LED_Test_GPIO_Port, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : RSX_Pin WRX_Pin CDX_Pin CSX_Pin */
+  GPIO_InitStruct.Pin = RSX_Pin | WRX_Pin | CDX_Pin | CSX_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
+  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
   /* USER CODE BEGIN MX_GPIO_Init_2 */
 
