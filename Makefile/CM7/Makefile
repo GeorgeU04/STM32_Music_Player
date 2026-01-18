@@ -89,6 +89,8 @@ C_SOURCES := \
 ../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_uart.c \
 ../../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_ll_sdmmc.c \
 ../../Middlewares/Third_Party/FatFs/src/ff_gen_drv.c \
+../../Middlewares/Third_Party/FatFs/src/ff.c \
+../../Middlewares/Third_Party/FatFs/src/diskio.c \
 ../../CM7/FATFS/App/fatfs.c \
 ../../CM7/FATFS/Target/sd_diskio.c \
 ../../CM7/FATFS/Target/fatfs_platform.c \
@@ -99,6 +101,7 @@ C_SOURCES := \
 ../../CM7/Core/Src/ILI9341.c \
 ../../CM7/Core/Src/lv_port_disp.c \
 ../../CM7/Core/Src/GUI.c \
+../../CM7/Core/Src/SD.c \
 
 
 # Combine project + LVGL sources

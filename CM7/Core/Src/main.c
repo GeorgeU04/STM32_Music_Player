@@ -23,6 +23,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "../Inc/GUI.h"
+#include "../Inc/SD.h"
 #include "src/widgets/label/lv_label.h"
 #include "stm32h7xx_hal_def.h"
 #include "stm32h7xx_hal_gpio.h"
@@ -173,8 +174,10 @@ int main(void) {
   /* USER CODE BEGIN WHILE */
   // Init Screen
 
+  struct album currentAlbum = {0};
+  readAlbumData(&currentAlbum);
   initScreen();
-  drawMainScreen();
+  drawMainScreen(currentAlbum);
   while (1) {
     /* USER CODE END WHILE */
 

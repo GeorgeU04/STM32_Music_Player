@@ -17,11 +17,9 @@
 / by use of this software.
 /----------------------------------------------------------------------------*/
 
-
 #include "ff.h"			/* Declarations of FatFs API */
-#include "diskio.h"		/* Declarations of device I/O functions */
-
-
+#include "../../Middlewares/Third_Party/FatFs/src/diskio.h"
+#include "../../CM7/FATFS/Target/ffconf.h"
 /*--------------------------------------------------------------------------
 
    Module Private Definitions

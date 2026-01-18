@@ -1,4 +1,5 @@
 #include "../Inc/GUI.h"
+#include "../Inc/SD.h"
 #include "lv_port_disp.h"
 #include "main.h"
 #include "src/core/lv_obj_pos.h"
@@ -12,6 +13,8 @@
 #include "src/widgets/button/lv_button.h"
 #include "src/widgets/label/lv_label.h"
 #include <stdint.h>
+#include <stdio.h>
+#include <string.h>
 
 void initScreen(void) {
   RSX_GPIO_Port->BSRR = RSX_Pin << 16;
@@ -38,7 +41,8 @@ void initScreen(void) {
                          LV_DISPLAY_RENDER_MODE_PARTIAL);
 }
 
-void drawMainScreen(void) {
+void drawMainScreen(struct album album) {
+  int8_t retVal = 0;
   /*Change the active screen's background color*/
   lv_obj_set_style_bg_color(lv_screen_active(), lv_color_hex(0x003a57),
                             LV_PART_MAIN);
@@ -46,11 +50,21 @@ void drawMainScreen(void) {
   // artist name
   char artistName[32] = "Kanye West";
   int32_t artistNameY = 60;
+  retVal = mountSDCard();
+
+  // if (retVal == -1) {
+  //   strncpy(album.AlbumName, "SD Mount Error", sizeof(album.AlbumName));
+  // } else if (retVal == -2) {
+  //   strncpy(album.AlbumName, "Dir Open Error", sizeof(album.AlbumName));
+  // } else if (retVal == -3) {
+  //   strncpy(album.AlbumName, "File Open Error", sizeof(album.AlbumName));
+  // }
+  snprintf(album.AlbumName, sizeof(album.AlbumName), "Err: %d", retVal);
   lv_obj_t *artistNameText = lv_label_create(lv_screen_active());
   lv_obj_set_style_text_font(artistNameText, &lv_font_montserrat_16, 0);
   lv_obj_set_style_text_color(lv_screen_active(), lv_color_hex(0xffffff),
                               LV_PART_MAIN);
-  lv_label_set_text(artistNameText, artistName);
+  lv_label_set_text(artistNameText, album.AlbumName);
   lv_obj_align(artistNameText, LV_ALIGN_CENTER, 0, artistNameY);
 
   // song name

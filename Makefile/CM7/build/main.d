@@ -46,7 +46,8 @@ build/main.o: ../../CM7/Core/Src/main.c ../../CM7/Core/Inc/main.h \
  ../../Drivers/lvgl/../../Middlewares/Third_Party/FatFs/src/ff_gen_drv.h \
  ../../Drivers/lvgl/../../Middlewares/Third_Party/FatFs/src/diskio.h \
  ../../Drivers/lvgl/../../Middlewares/Third_Party/FatFs/src/ff.h \
- ../../CM7/Core/Src/../Inc/GUI.h \
+ ../../CM7/Core/Src/../Inc/GUI.h ../../CM7/Core/Src/../Inc/SD.h \
+ ../../CM7/Core/Src/../Inc/SD.h \
  ../../Drivers/lvgl/src/widgets/label/lv_label.h \
  ../../Drivers/lvgl/src/widgets/label/../../lv_conf_internal.h \
  ../../Drivers/lvgl/src/widgets/label/../../lv_conf_kconfig.h \
@@ -222,6 +223,8 @@ build/main.o: ../../CM7/Core/Src/main.c ../../CM7/Core/Inc/main.h \
 ../../Drivers/lvgl/../../Middlewares/Third_Party/FatFs/src/diskio.h:
 ../../Drivers/lvgl/../../Middlewares/Third_Party/FatFs/src/ff.h:
 ../../CM7/Core/Src/../Inc/GUI.h:
+../../CM7/Core/Src/../Inc/SD.h:
+../../CM7/Core/Src/../Inc/SD.h:
 ../../Drivers/lvgl/src/widgets/label/lv_label.h:
 ../../Drivers/lvgl/src/widgets/label/../../lv_conf_internal.h:
 ../../Drivers/lvgl/src/widgets/label/../../lv_conf_kconfig.h:

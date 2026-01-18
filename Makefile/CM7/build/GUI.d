@@ -1,4 +1,5 @@
 build/GUI.o: ../../CM7/Core/Src/GUI.c ../../CM7/Core/Src/../Inc/GUI.h \
+ ../../CM7/Core/Src/../Inc/SD.h ../../CM7/Core/Src/../Inc/SD.h \
  ../../CM7/Core/Inc/lv_port_disp.h ../../Drivers/lvgl/src/lvgl.h \
  ../../Drivers/lvgl/src/../lvgl.h ../../Drivers/lvgl/src/../lv_version.h \
  ../../Drivers/lvgl/src/../src/lv_init.h \
@@ -497,6 +498,8 @@ build/GUI.o: ../../CM7/Core/Src/GUI.c ../../CM7/Core/Src/../Inc/GUI.h \
  ../../Drivers/lvgl/src/widgets/button/lv_button.h \
  ../../Drivers/lvgl/src/widgets/label/lv_label.h
 ../../CM7/Core/Src/../Inc/GUI.h:
+../../CM7/Core/Src/../Inc/SD.h:
+../../CM7/Core/Src/../Inc/SD.h:
 ../../CM7/Core/Inc/lv_port_disp.h:
 ../../Drivers/lvgl/src/lvgl.h:
 ../../Drivers/lvgl/src/../lvgl.h:
